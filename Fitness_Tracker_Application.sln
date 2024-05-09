@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fitness_Tracker_Application", "Fitness_Tracker_Application\Fitness_Tracker_Application.csproj", "{E66CF27F-C078-4A49-918D-5172B8B14FAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E66CF27F-C078-4A49-918D-5172B8B14FAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E66CF27F-C078-4A49-918D-5172B8B14FAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E66CF27F-C078-4A49-918D-5172B8B14FAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E66CF27F-C078-4A49-918D-5172B8B14FAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal
