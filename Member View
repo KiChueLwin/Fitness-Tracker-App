@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Fitness_Tracker_Application
+{
+    public partial class MemberData : Form
+    {
+        public MemberData()
+        {
+            InitializeComponent();
+            string MID = MemberLogin.MemberID;
+            string memberID = MemberLogin.MemberID;
+            if (!string.IsNullOrEmpty(MID))
+            {
+                // Get data for the selected member only
+               
+                dtdata = objMm.CheckData(MID);
+                dgvMemberdata.DataSource = dtdata;
+                dgvMemberdata.Refresh();
+            }
+
+            if (!string.IsNullOrEmpty(memberID))
+            {
+                // show data from Member's goal 
+                dtgoal = objgoal.Getgoaldata(memberID);
+                dgvMembergoal.DataSource = dtgoal;
+                dgvMembergoal.Refresh();
+            }
+
+
+
+        }
+        FitnessTrackerDatabaseTableAdapters.MemberTableAdapter objMm = new FitnessTrackerDatabaseTableAdapters.MemberTableAdapter();
+        FitnessTrackerDatabaseTableAdapters.GoalInfoTableAdapter objgoal = new FitnessTrackerDatabaseTableAdapters.GoalInfoTableAdapter();
+        DataTable dtdata = new DataTable();
+        DataTable dtgoal = new DataTable();
+
+
+        
+
+        private void lnkBack_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            HomePage HP = new HomePage();
+            HP.Show();
+            this.Hide();
+        }
+    }
+}
