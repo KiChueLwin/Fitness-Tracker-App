@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Fitness_Tracker_Application
+{
+    public partial class MemberLogin : Form
+    {
+        public MemberLogin()
+        {
+            InitializeComponent();
+        }
+
+        FitnessTrackerDatabaseTableAdapters.MemberTableAdapter MT = new FitnessTrackerDatabaseTableAdapters.MemberTableAdapter();
+       // DataTable MT = new DataTable();
+
+        
+        private int LoginCount = 0;
+        public static string MemberID, MemberName;
+     
+
+        
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+
+            this.Hide();
+            MemberRegister UserRtr = new MemberRegister();
+            UserRtr.Show();
+
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string Email = txtEmail.Text;
+            string PW = txtPassword.Text;
+            if (LoginCount == 3)
+            {
+                MessageBox.Show("Login Fail three times! You have reached your limit");
+            }
+            else if (txtEmail.Text == "")
+            {
+                MessageBox.Show("You still need to fill your Email!");
+            }
+            else if (txtPassword.Text == "")
+            {
+                MessageBox.Show("You need to fill your Password!");
+            }
+            else
+            {
+                DataTable dt = new DataTable();
+                dt = MT.MemberLogin(txtEmail.Text, txtPassword.Text);
+
+                // checking data form database through the data grid view
+                if (dt.Rows.Count == 1)
+                {
+                    MessageBox.Show("Login Successful");
+                    dgvMemberLogin.DataSource = dt;
+                    // carry data through primary set key with ID and Name 
+                    MemberName = dgvMemberLogin[1, 0].Value.ToString();
+                    MemberID = dgvMemberLogin [0,0].Value .ToString ();
+
+
+                    HomePage HP = new HomePage();
+                    HP.Show();
+                    this.Hide();
+
+
+                }
+                else
+                {
+                    LoginCount += 1;
+                    MessageBox.Show("Invalid Login! Attempt" + LoginCount);
+
+                }
+            }
+
+
+
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
