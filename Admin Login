@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Fitness_Tracker_Application
+{
+    public partial class AdminLogin : Form
+    {
+        public AdminLogin()
+        {
+            InitializeComponent();
+        }
+        FitnessTrackerDatabaseTableAdapters.AdminTableAdapter objAdmin = new FitnessTrackerDatabaseTableAdapters.AdminTableAdapter();
+
+
+        private int LoginCount = 0;
+        public static string MemberID, MemberName;
+     
+        private void lklSignUp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            AdminEntry AE = new AdminEntry();
+            AE.Show();
+            this.Hide();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            string Email = txtEmail.Text;
+            string PW = txtPassword.Text;
+
+
+           //  checking conditions of user input to required information
+             if (txtEmail.Text == " ")
+            {
+                MessageBox.Show("You need to fill your Email!");
+            }
+            else if (txtPassword.Text == "")
+            {
+                MessageBox.Show("You need to fill your Password!");
+            }
+             else if (LoginCount == 3)
+             {
+                 MessageBox.Show("Login Fail three times! You have reached your limit");
+             } 
+             else 
+
+             {
+                DataTable dt = new DataTable();
+                dt = objAdmin.AdminLogin(txtEmail.Text, txtPassword.Text);
+
+               // Checking data in data grid view to pull out 
+                if (dt.Rows.Count == 1)
+                {
+                    MessageBox.Show("Login Successful");
+                    dgvAdminLogin.DataSource = dt;
+                    MemberName = dgvAdminLogin[1, 0].Value.ToString();
+                    MemberID = dgvAdminLogin[0, 0].Value.ToString();
+                    
+                    // want to show home page to observe some functions for admins
+                    AdminHome  AH = new AdminHome ();
+                    AH.Show();
+                   this.Hide();
+
+                }
+                else
+                {
+                    LoginCount += 1;
+                    MessageBox.Show("Invalid Login! Attempt" + LoginCount);
+
+                }
+            }
+        }
+    }
+}
