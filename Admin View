@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Fitness_Tracker_Application
+{
+    public partial class AdminView : Form
+    {
+        public AdminView()
+        {
+            InitializeComponent();
+
+            // show data from Member 
+            dt = objMm.GetData();
+            dgvMmdata.DataSource = dt;
+            dgvMmdata.Refresh();
+        }
+        FitnessTrackerDatabaseTableAdapters.MemberTableAdapter objMm = new FitnessTrackerDatabaseTableAdapters.MemberTableAdapter();
+        DataTable dt = new DataTable();
+        private void AdminView_Load(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
