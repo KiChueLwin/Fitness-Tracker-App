@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Fitness_Tracker_Application
+{
+    public partial class HomePage : Form
+    {
+        public HomePage()
+        {
+          InitializeComponent();
+          lblMbName.Text = MemberLogin.MemberName;
+        
+        }
+
+        private void btnGoals_Click(object sender, EventArgs e)
+        {
+            
+            Goal GL = new Goal();
+            GL.Show();
+            this.Hide();
+        }
+
+        private void btnActivities_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Activity AT = new Activity();
+            AT.Show();
+        }
+
+        private void passwordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangePassword CP = new ChangePassword();
+            CP.Show();
+            this.Hide();
+        }
+
+        private void btnProgress_Click(object sender, EventArgs e)
+        {
+            Progress PG = new Progress();
+            PG.Show();
+            this.Hide();
+        }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MemberLogin ML = new MemberLogin();
+            ML.Show();
+            this.Hide();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}
